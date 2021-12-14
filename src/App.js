@@ -14,7 +14,11 @@ const headers = {
 
 const columns = [{  
   Header: 'Cliente',  
-  accessor: 'name'  
+  accessor: 'name',
+  width: 260,
+  style: { 'whiteSpace': 'unset' } //Add this line to the column definition
+
+  
  },{  
  Header: 'Pedido',  
  accessor: 'products' , 
@@ -22,7 +26,9 @@ const columns = [{
 
  },{  
 Header: 'Observaciones',  
-accessor: 'note'  
+accessor: 'note'  ,
+style: { 'whiteSpace': 'unset' } //Add this line to the column definition
+
 }]   
 
 let ordeerProducts = [];
@@ -157,7 +163,8 @@ function App() {
     <ReactTable  
         data={data}  
         columns={columns}  
-        style={{overflow:'wrap'}}
+        style={{overflow:'wrap',
+                overflowWrap: 'break-word'}}
         getTrProps ={ (state, rowInfo, instance) => {
           index+=1;
 
