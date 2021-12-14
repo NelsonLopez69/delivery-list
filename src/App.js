@@ -7,6 +7,7 @@ import axios from "axios";
 import ReactTable from "react-table-6";
 import 'react-table-6/react-table.css'
 
+let BACKEND_IP="192.168.0.111"
 
 const headers = {
   'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI4MDA2MTU5LCJleHAiOjE2MzA1OTgxNTl9.LOHf9jPyvudVeqRLvSZzDcXj58Yd4WQQGKSuW0Lc7Aw',
@@ -127,9 +128,10 @@ function App() {
 
 
   useEffect( () => {  
+    console.log('http://'+BACKEND_IP+':5000/events')
 
     if (!listening) {
-      const events = new EventSource('http://localhost:5000/events');
+      const events = new EventSource('http://'+BACKEND_IP+':5000/events');
       events.onmessage = (event) => {
         sleep(1000).then(() => {
          
