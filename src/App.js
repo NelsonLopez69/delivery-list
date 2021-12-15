@@ -166,7 +166,8 @@ function App() {
         data={data}  
         columns={columns}  
         style={{overflow:'wrap',
-                overflowWrap: 'break-word'}}
+                overflowWrap: 'break-word',
+                fontSize: 40}}
         getTrProps ={ (state, rowInfo, instance) => {
           index+=1;
 
