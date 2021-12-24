@@ -6,8 +6,10 @@ import LoaderHandler from "./components/LoaderHandler";
 import axios from "axios";
 import ReactTable from "react-table-6";
 import 'react-table-6/react-table.css'
+import ReconnectingEventSource from "reconnecting-eventsource";
 
-let BACKEND_IP="192.168.0.119"
+
+let BACKEND_IP="localhost"
 
 const headers = {
   'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI4MDA2MTU5LCJleHAiOjE2MzA1OTgxNTl9.LOHf9jPyvudVeqRLvSZzDcXj58Yd4WQQGKSuW0Lc7Aw',
@@ -102,9 +104,6 @@ function formatData () {
   ))
   
 
-
-  //ans.push({name: "Julis",products: "1 trucha", note: "bien frita" })
-  console.log("kengt2 ", ans.length)
   return ans
 
 }
@@ -128,37 +127,36 @@ function App() {
 
 
   useEffect( () => {  
-    console.log('http://'+BACKEND_IP+':5000/events')
+    //console.log('http://'+BACKEND_IP+':5000/events')
 
     if (!listening) {
-      const events = new EventSource('http://'+BACKEND_IP+':5000/events');
+      const events = new ReconnectingEventSource('http://localhost:5000/events');
       events.onmessage = (event) => {
-        sleep(1000).then(() => {
-         
+        console.log("evento: "+event)
+
         setData([])
 
         console.log("before.5", ordeerProducts.length)
 
         ordeerProducts = []
 
-        axios.get("http://"+BACKEND_IP+":5000/api/orders", { headers })
+        axios.get("http://localhost:5000/api/orders", { headers })
         .then(response => {    
 
-          console.log("innn", ordeerProducts.length)
+          console.log("innn", response.data.orders.length)
 
                   response.data.orders.filter(ord => !ord.isPaid).map((ordr) => {
                    ordeerProducts.push(ordr)
                    } )
       
                    setData(formatData())
-
-        }) })
-      };
+        }) 
+            };
 
 
       setListening(true);
     }
-  }, [data]);
+  }, [listening,data]);
 
   return (
     <div>  
