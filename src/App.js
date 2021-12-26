@@ -30,7 +30,7 @@ const columns = [{
  },{  
 Header: 'Observaciones',  
 accessor: 'note'  ,
-width: 360,
+width: 330,
 style: { 'whiteSpace': 'unset' } //Add this line to the column definition
 
 }]   
