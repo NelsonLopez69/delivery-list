@@ -9,7 +9,7 @@ import 'react-table-6/react-table.css'
 import ReconnectingEventSource from "reconnecting-eventsource";
 
 
-let BACKEND_IP="localhost"
+let BACKEND_IP="192.168.0.119"
 
 const headers = {
   'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI4MDA2MTU5LCJleHAiOjE2MzA1OTgxNTl9.LOHf9jPyvudVeqRLvSZzDcXj58Yd4WQQGKSuW0Lc7Aw',
@@ -30,6 +30,7 @@ const columns = [{
  },{  
 Header: 'Observaciones',  
 accessor: 'note'  ,
+width: 360,
 style: { 'whiteSpace': 'unset' } //Add this line to the column definition
 
 }]   
